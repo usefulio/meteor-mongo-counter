@@ -3,17 +3,14 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-  api.use(['coffeescript', 'mongo-livedata'], 'server');
-  if (api.export) {
-    api.export('incrementCounter', 'server');
-    api.export('decrementCounter', 'server');
-    api.export('setCounter', 'server');
-    api.export('deleteCounters', 'server', {testOnly: true});
-  }
-  api.add_files('counter.coffee', 'server');
+  api.use(['mongo-livedata'], 'server');
+  api.add_files('counter.js', ['client','server']);
+  api.export('AtomicCounter', ['client','server']);
 });
 
 Package.on_test(function(api) {
-  api.use(['coffeescript', 'tinytest', 'mongo-counter']);
-  api.add_files('counter-tests.coffee', 'server');
+  api.use(['tinytest']);
+  api.use(['mongo-livedata'], 'server');
+  api.add_files('counter.js', ['client','server']);
+  api.add_files('counter-tests.js', 'server');
 });

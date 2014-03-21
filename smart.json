@@ -1,13 +1,8 @@
 {
   "name": "mongo-counter",
-
   "description": "Atomic counters stored in MongoDB.",
-
-  "homepage": "https://github.com/awwx/meteor-mongo-counter#readme",
-
-  "author": "Andrew Wilcox",
-
-  "version": "1.1.0",
-
-  "git": "https://github.com/awwx/meteor-mongo-counter.git"
+  "homepage": "https://github.com/usefulio/meteor-mongo-counter",
+  "author": "Ian Serlin (https://github.com/usefulio)",
+  "version": "2.0.0",
+  "git": "https://github.com/usefulio/meteor-mongo-counter.git"
 }

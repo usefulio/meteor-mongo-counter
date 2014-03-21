@@ -1,3 +1,5 @@
+Originally forked from https://github.com/awwx/meteor-mongo-counter
+
 # mongo-counter
 
 Atomic counters stored in MongoDB.
@@ -27,87 +29,98 @@ Counters are not themselves a reactive data source, but you can store
 the counter value into a reactive data source such as a Meteor
 document whenever you increment or decrement a counter.
 
+## Example
+
+```
+// server
+var nextCustomerId = AtomicCounter.increment('customerId'); // auto increments by one
+```
+
+```
+// client
+AtomicCounter.increment('customerId', 5, function(err, newCustomerId){
+  // newCustomerId will be latest customerId incremented by 5
+});
+```
 
 ## Version
 
-1.1.0
+2.0.0
 
-Meteor linker supported:
-This implementation works with both pre-linker Meteor (0.6.4.1 and
-below) and the new "linker" version of Meteor (0.6.5-rc12 and above).
+- Supports Meteor 0.7.x+
+- implements a client/server standardized api
 
 
 ## API
 
-Note that this API is defined on the server only, and that these
-functions are not defined in the client.  To access them from the
-client, create a Meteor method on the server that calls the API,
-and then call the method from the client.
+Both the client and the server have access to an object named `AtomicCounter`.
+
+AtomicCounter implements the following methods (however typically you'd only need to use AtomicCounter.increment):
 
 
-### incrementCounter
+### increment
 
-**incrementCounter(name, [amount])** &nbsp; *server*
+AtomicCounter.**increment(counterName, [amount])**
 
 Increments a database counter and returns the new value.
 
 *Arguments*
 
 <dl>
-  <dt>name: string</dt>
+  <dt>counterName: string</dt>
   <dd>The name of the counter to increment.</dd>
 
   <dt>amount: integer</dt>
   <dd>The amount to increment the counter by, defaulting to one.</dd>
 </dl>
 
-Increments the counter named *name* in the database, and atomically
+Increments the counter named *counterName* in the database, and atomically
 returns the new value.  New counters conceptually start at zero, so if
 you increment a new counter by one you will receive one on the first
 call.
 
 
-### decrementCounter
+### decrement
 
-**decrementCounter(name, [amount])** &nbsp; *server*
+AtomicCounter.**decrement(counterName, [amount])**
 
 Decrements a database counter and returns the new value.
 
 *Arguments*
 
 <dl>
-  <dt>name: string</dt>
-  <dd>The name of the counter to decrement.</dd>
+  <dt>counterName: string</dt>
+  <dd>The counterName of the counter to decrement.</dd>
 
   <dt>amount: integer</dt>
   <dd>The amount to decrement the counter by, defaulting to one.</dd>
 </dl>
 
-Decrements the counter named *name* in the database, and atomically
+Decrements the counter named *counterName* in the database, and atomically
 returns the new value.
 
 
-### setCounter
+### set
 
-**setCounter(name, value)** &nbsp; *server*
+AtomicCounter.**set(counterName, value)**
 
 Sets a counter.
 
 *Arguments*
 
 <dl>
-  <dt>name: string</dt>
-  <dd>The name of the counter to set.</dd>
+  <dt>counterName: string</dt>
+  <dd>The counterName of the counter to set.</dd>
 
   <dt>value: integer</dt>
   <dd>The value to set the counter to.</dd>
 </dl>
 
-Sets the counter to the specified value.
+Sets the counter name *counterName* to the specified value.
 
 This is primarily useful for setting a new counter to an initial
 value.  (If a counter was currently 10 and one method called
-`incrementCounter` while another simultaneously called `setCounter`
+`increment` while another simultaneously called `set`
 with a value of 0, it would be indeterminate whether the first method
 received 11 or 1).
 
@@ -148,26 +161,6 @@ implementation accesses Mongo directly without going through a Meteor
 Collection.
 
 The Mongo collection used to store counter values is
-"awwx_mongo_counter".  Accessing this collection with
+"atomic_mongo_counter".  Accessing this collection with
 a Meteor Collection isn't recommended, because changes made by
 `incrementCounter` aren't reported back to Meteor.
-
-
-## Donate
-
-An easy and effective way to support the continued maintenance of this
-package and the development of new and useful packages is to [donate
-through Gittip](https://www.gittip.com/awwx/).
-
-Gittip is a [platform for sustainable
-crowd-funding](https://www.gittip.com/about/faq.html).
-
-Help build an ecosystem of well maintained, quality Meteor packages by
-joining the
-[Gittip Meteor Community](https://www.gittip.com/for/meteor/).
-
-
-## Hire
-
-Need support, debugging, or development for your project?  You can
-[hire me](http://awwx.ws/hire-me) to help out.
