@@ -1,4 +1,3 @@
-Originally forked from https://github.com/awwx/meteor-mongo-counter
 
 # mongo-counter
 
@@ -164,3 +163,7 @@ The Mongo collection used to store counter values is
 "atomic_mongo_counter".  Accessing this collection with
 a Meteor Collection isn't recommended, because changes made by
 `incrementCounter` aren't reported back to Meteor.
+
+## Credits
+
+Originally forked from https://github.com/awwx/meteor-mongo-counter
