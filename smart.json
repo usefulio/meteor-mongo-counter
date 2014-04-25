@@ -1,5 +1,5 @@
 {
-  "name": "mongo-counter",
+  "name": "atomic-counter",
   "description": "Atomic counters stored in MongoDB.",
   "homepage": "https://github.com/usefulio/meteor-mongo-counter",
   "author": "Ian Serlin (https://github.com/usefulio)",
