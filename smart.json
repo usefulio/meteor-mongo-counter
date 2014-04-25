@@ -1,6 +1,6 @@
 {
   "name": "atomic-counter",
-  "description": "Atomic counters stored in MongoDB.",
+  "description": "Atomic counters stored in MongoDB available on client and server.",
   "homepage": "https://github.com/usefulio/meteor-mongo-counter",
   "author": "Ian Serlin (https://github.com/usefulio)",
   "version": "2.0.0",
