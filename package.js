@@ -1,16 +1,22 @@
 Package.describe({
-  summary: "Atomic counters stored in MongoDB"
+	name: 'useful:mongo-counter',
+	version: '0.1.0',
+	summary: 'Atomic counters stored in MongoDB',
+	git: 'https://github.com/usefulio/meteor-mongo-counter',
+	documentation: 'README.md'
 });
 
-Package.on_use(function (api) {
-  api.use(['mongo-livedata'], 'server');
-  api.add_files('counter.js', ['client','server']);
-  api.export('AtomicCounter', ['client','server']);
+Package.onUse(function(api) {
+
+	api.versionsFrom('1.0');
+	api.use(['mongo-livedata'], 'server');
+	api.addFiles('counter.js', ['client','server']);
+	api.export('AtomicCounter', ['client','server']);
 });
 
-Package.on_test(function(api) {
-  api.use(['tinytest']);
-  api.use(['mongo-livedata'], 'server');
-  api.add_files('counter.js', ['client','server']);
-  api.add_files('counter-tests.js', 'server');
+Package.onTest(function(api) {
+	api.use(['tinytest']);
+	api.use(['mongo-livedata'], 'server');
+	api.addFiles('counter.js', ['client','server']);
+	api.addFiles('counter-tests.js', 'server');
 });
