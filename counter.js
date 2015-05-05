@@ -7,7 +7,7 @@ if(Meteor.isServer){
   };
 
   getRawMongoCollection = function(collectionName){
-    return MongoInternals.defaultRemoteCollectionDriver().mongo._getCollection(collectionName);
+    return MongoInternals.defaultRemoteCollectionDriver().mongo.rawCollection(collectionName);
   };
 
   getCounterCollection = function(){
@@ -20,7 +20,7 @@ if(Meteor.isServer){
       args.push(arguments[i]);
     }
     var Counters = getCounterCollection();
-    return Meteor._wrapAsync(Counters[method]).apply(Counters, args);
+    return Meteor.wrapAsync(Counters[method]).apply(Counters, args);
   };
 
   _deleteCounters = function(){
